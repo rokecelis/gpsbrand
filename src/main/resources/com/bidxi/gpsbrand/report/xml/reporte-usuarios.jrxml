@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte-errores" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="6bc57715-0466-4161-b1b0-de86fbaf0f04">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.crosstab.bucket.measure.limit" value="10000000000"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="username" class="java.lang.String"/>
+	<field name="lastAccess" class="java.util.Date"/>
+	<field name="enabled" class="java.lang.Boolean"/>
+	<title>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="157" y="25" width="645" height="20" backcolor="#2CD7E6" uuid="25766b70-e0c3-45d1-b35f-7e1a21d338d2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Usuarios]]></text>
+			</staticText>
+			<image scaleImage="Clip" hAlign="Right" vAlign="Bottom" isLazy="true" onErrorType="Icon" hyperlinkType="Reference">
+				<reportElement mode="Opaque" x="7" y="0" width="150" height="76" backcolor="#DDFFDD" uuid="98193509-96ae-4edf-9a23-94b4090ac615"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="108" height="20" backcolor="#6391DF" uuid="b142770d-6041-4f48-ba08-c50172ee982b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fila]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="108" y="1" width="121" height="20" backcolor="#6391DF" uuid="00d5002f-dd4e-4c52-98e9-3d9fdb773482"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Columna]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="229" y="1" width="573" height="20" backcolor="#6391DF" uuid="7737664c-f6a1-4deb-b9bb-6fa2443ca9d4"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="108" height="21" uuid="0cb040d9-e4ec-4df0-827a-4a1bfd1bcd9f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="0" width="121" height="21" uuid="0f8766b6-d0fe-4826-b464-4af5d8f64462"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="229" y="0" width="573" height="21" uuid="cebe86b5-e2fc-4343-98c1-86926426fd42"/>
+				<textFieldExpression><![CDATA[$F{lastAccess}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

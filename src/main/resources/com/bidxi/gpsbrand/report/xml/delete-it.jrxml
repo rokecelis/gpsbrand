@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="imports-exports-customs-pdf" pageWidth="1440" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="1400" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="a5f899ef-f71b-4dbf-ad2b-a20317db12a6">
+  <property name="ireport.zoom" value="0.826446280991737"/>
+  <property name="ireport.x" value="0"/>
+  <property name="ireport.y" value="0"/>
+  <property name="footerPosition" value="StackAtBottom"/>
+  <style name="Crosstab Data Text" hAlign="Center"/>
+  <style name="table">
+    <box>
+      <pen lineWidth="1.0" lineColor="#000000"/>
+    </box>
+  </style>
+  <style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+    <box>
+      <pen lineWidth="0.5" lineColor="#000000"/>
+    </box>
+  </style>
+  <style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+    <box>
+      <pen lineWidth="0.5" lineColor="#000000"/>
+    </box>
+  </style>
+  <style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+    <box>
+      <pen lineWidth="0.5" lineColor="#000000"/>
+    </box>
+  </style>
+  <style name="table 1">
+    <box>
+      <pen lineWidth="1.0" lineColor="#000000"/>
+    </box>
+  </style>
+  <style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+    <box>
+      <pen lineWidth="0.5" lineColor="#000000"/>
+    </box>
+  </style>
+  <style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+    <box>
+      <pen lineWidth="0.5" lineColor="#000000"/>
+    </box>
+  </style>
+  <style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+    <box>
+      <pen lineWidth="0.5" lineColor="#000000"/>
+    </box>
+  </style>
+  <subDataset name="datasetFa" uuid="9f61f4cd-ed85-4b59-ab25-fdfd9db479ba">
+    <field name="clave" class="java.lang.String"/>
+    <field name="catFraccionDescripcion" class="java.lang.String"/>
+    <field name="coeficiente" class="java.lang.String"/>
+  </subDataset>
+  <subDataset name="dataset1" uuid="e7f18f4e-6544-482a-9ba8-adc683fb817e"/>
+  <parameter name="logoAserca" class="java.io.InputStream"/>
+  <parameter name="logoCima" class="java.io.InputStream"/>
+  <parameter name="logoSagarpa" class="java.io.InputStream"/>
+  <parameter name="lineaSuperior" class="java.io.InputStream"/>
+  <parameter name="lineaInferior" class="java.io.InputStream"/>
+  <parameter name="fechaReporte" class="java.lang.String"/>
+  <parameter name="caption" class="java.lang.String"/>
+  <parameter name="source" class="java.lang.String"/>
+  <parameter name="idOperacion" class="java.lang.Integer"/>
+  <parameter name="tipoOperacion" class="java.lang.String"/>
+  <parameter name="mes" class="java.lang.String"/>
+  <parameter name="anio" class="java.lang.String"/>
+  <parameter name="producto" class="java.lang.String"/>
+  <parameter name="variedad" class="java.lang.String"/>
+  <parameter name="unidadMedida" class="java.lang.String"/>
+  <parameter name="cifrasDe" class="java.lang.Integer"/>
+  <parameter name="cveFraccion" class="java.lang.String"/>
+  <parameter name="isReporteAnual" class="java.lang.Boolean"/>
+  <parameter name="dataSourceCrosstab" class="net.sf.jasperreports.engine.JRDataSource"/>
+  <parameter name="dataSourceFA" class="net.sf.jasperreports.engine.JRDataSource"/>
+  <parameter name="subreportCrosstab" class="net.sf.jasperreports.engine.JasperReport"/>
+  <background>
+    <band splitType="Stretch"/>
+  </background>
+  <pageHeader>
+    <band height="176">
+      <image scaleImage="RetainShape" isUsingCache="true" onErrorType="Blank">
+        <reportElement x="498" y="0" width="116" height="50" uuid="a0d096f3-9993-4f76-b6c6-97705d531a48"/>
+        <imageExpression><![CDATA[$P{logoAserca}]]></imageExpression>
+      </image>
+      <image scaleImage="RetainShape" isUsingCache="true" onErrorType="Blank">
+        <reportElement x="1250" y="0" width="150" height="50" uuid="a0d096f3-9993-4f76-b6c6-97705d531a48"/>
+        <imageExpression><![CDATA[$P{logoCima}]]></imageExpression>
+      </image>
+      <image scaleImage="RetainShape" isUsingCache="true" onErrorType="Blank">
+        <reportElement x="252" y="61" width="500" height="10" uuid="74cb45bd-572b-477a-93b5-deaa9660ba3a"/>
+        <imageExpression><![CDATA[$P{lineaSuperior}]]></imageExpression>
+      </image>
+      <image scaleImage="RetainShape" isUsingCache="true" onErrorType="Blank" evaluationTime="Report">
+        <reportElement x="0" y="0" width="216" height="50" uuid="a0d096f3-9993-4f76-b6c6-97705d531a48"/>
+        <imageExpression><![CDATA[$P{logoSagarpa}]]></imageExpression>
+      </image>
+      <textField>
+        <reportElement x="0" y="81" width="1400" height="20" uuid="ea3c914c-af6f-4252-8608-2ac10f0dd63a"/>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="13" isBold="true"/>
+        </textElement>
+        <textFieldExpression><![CDATA["Aduanas de " + ($P{idOperacion} == 1 ? "entrada " : "salida ") + "de las " + ( $P{idOperacion} == 1 ? "Importaciones " : "Exportaciones " ) + "de "]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="0" y="153" width="1400" height="20" uuid="dcebf958-2807-4044-8114-069d32afc232"/>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="13" isBold="true"/>
+        </textElement>
+        <textFieldExpression><![CDATA["Fecha y hora de consulta: " + $P{fechaReporte}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="105" width="1400" height="20" uuid="fa58af1b-1cac-4b7a-8f1e-5dde797ae78c"/>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="13" isBold="true"/>
+        </textElement>
+        <textFieldExpression><![CDATA[($P{cveFraccion} != null ? "Fracción: " + $P{cveFraccion} : ($P{producto} + ($P{variedad} != null ? " " + $P{variedad} : "")))]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="129" width="1400" height="20" uuid="94090bdf-c3a6-4c91-b496-83ff05799229"/>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="13" isBold="true"/>
+        </textElement>
+        <textFieldExpression><![CDATA[$P{unidadMedida}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <detail>
+    <band height="86">
+      <subreport>
+        <reportElement x="0" y="0" width="200" height="86" uuid="043a0158-6b6c-43ba-b9b9-3d34ff6a1173"/>
+        <dataSourceExpression><![CDATA[$P{dataSourceCrosstab}]]></dataSourceExpression>
+        <subreportExpression><![CDATA[$P{subreportCrosstab}]]></subreportExpression>
+      </subreport>
+    </band>
+  </detail>
+  <pageFooter>
+    <band height="119">
+      <staticText>
+        <reportElement x="0" y="53" width="1189" height="45" uuid="3ecaceb0-5a34-41d0-81c7-7276641fa12c"/>
+        <textElement textAlignment="Justified" verticalAlignment="Middle">
+          <font size="10" isBold="true"/>
+        </textElement>
+        <text><![CDATA[La información contenida en este documento ha sido obtenida de fuentes que se consideran fidedignas. Su propósito es sólo de carácter informativo por lo que ASERCA no se hacer responsable de cualquier interpretación que se haga del mismo.]]></text>
+      </staticText>
+      <image scaleImage="RetainShape" isUsingCache="true" onErrorType="Blank">
+        <reportElement x="-526" y="104" width="1715" height="12" uuid="0ecaa1b5-6a56-4fa6-8cb6-31e8a585dcb5"/>
+        <imageExpression><![CDATA[$P{lineaInferior}]]></imageExpression>
+      </image>
+      <textField>
+        <reportElement x="1243" y="98" width="93" height="14" uuid="3d4515ff-8510-4605-9021-9053eeb5d325"/>
+        <textElement textAlignment="Right"/>
+        <textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report">
+        <reportElement x="1336" y="98" width="56" height="14" uuid="c14448aa-14e5-4f88-ab23-22bc5cf39544"/>
+        <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageFooter>
+  <summary>
+    <band height="85" splitType="Stretch">
+      <componentElement>
+        <reportElement key="table 1" style="table 1" x="0" y="0" width="270" height="85" uuid="8eaf9765-bd57-4667-be4b-ac5c9ee1111b"/>
+        <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+          <datasetRun subDataset="datasetFa" uuid="3c7b1185-f785-428f-9596-538e1cc766ef">
+            <dataSourceExpression><![CDATA[$P{dataSourceFA}]]></dataSourceExpression>
+          </datasetRun>
+          <jr:column width="90" uuid="8d5fc90e-0b74-40ec-8f1e-f2296cc6eb40">
+            <jr:columnHeader style="table 1_CH" height="30">
+              <staticText>
+                <reportElement x="0" y="0" width="90" height="30" uuid="73e216be-ae66-447f-bb03-11d18aa08afd"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font size="8"/>
+                </textElement>
+                <text><![CDATA[Clave]]></text>
+              </staticText>
+            </jr:columnHeader>
+            <jr:detailCell style="table 1_TD" height="20">
+              <textField>
+                <reportElement x="0" y="0" width="90" height="20" uuid="7ca3f186-91e2-42b6-ab20-ce22542ed8fd"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font size="7"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{clave}]]></textFieldExpression>           
+              </textField>
+            </jr:detailCell>
+          </jr:column>
+          <jr:column width="90" uuid="ae14c3b0-13fe-4a81-ab99-af112254868a">
+            <jr:columnHeader style="table 1_CH" height="30">
+              <staticText>
+                <reportElement x="0" y="0" width="90" height="30" uuid="5c7f9f9c-f40c-44b6-8ce9-d659a0daeb28"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font size="8"/>
+                </textElement>
+                <text><![CDATA[Fracción Aranceralia]]></text>
+              </staticText>
+            </jr:columnHeader>
+            <jr:detailCell style="table 1_TD" height="20">
+              <textField>
+                <reportElement x="0" y="0" width="90" height="20" uuid="84e6dfbe-6eb2-481b-9eed-1eb8d20bde40"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font size="7"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{catFraccionDescripcion}]]></textFieldExpression>       
+                
+              </textField>
+            </jr:detailCell>
+          </jr:column>
+          <jr:column width="90" uuid="97d66043-2f1e-4b0e-aab0-317035dad012">
+            <jr:columnHeader style="table 1_CH" height="30">
+              <staticText>
+                <reportElement x="0" y="0" width="90" height="30" uuid="506c7019-dcbd-40a2-a739-65b3a14c823f"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font size="8"/>
+                </textElement>
+                <text><![CDATA[Coeficiente]]></text>
+              </staticText>
+            </jr:columnHeader>
+            <jr:detailCell style="table 1_TD" height="20">
+              <textField>
+                <reportElement x="0" y="0" width="90" height="20" uuid="127ba559-501e-4939-9faf-c25a332bb5e0"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font size="7"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{coeficiente}]]></textFieldExpression>
+              </textField>
+            </jr:detailCell>
+          </jr:column>
+        </jr:table>
+      </componentElement>
+    </band>
+  </summary>
+</jasperReport>

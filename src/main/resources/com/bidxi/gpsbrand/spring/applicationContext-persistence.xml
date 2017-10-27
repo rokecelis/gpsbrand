@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+    <!-- Load config file properties -->  
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:database.properties</value>                
+            </list>
+        </property>
+    </bean> 
+             
+    <!-- in-memory database and a datasource JNDI -->
+    <!--<bean id="mainDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="${jdbc.jndiName}"></property>
+        <property name="lookupOnStartup" value="true"></property>
+        <property name="cache" value="true"></property>
+        <property name="proxyInterface" value="javax.sql.DataSource"></property>
+    </bean>-->
+    
+    <!--in-memory database and a datasource JNDI-->     
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="poolName" value="hikariConnectionPool" />
+        <property name="connectionTestQuery" value="select 1 from dual" />
+        <property name="dataSourceClassName" value="${jdbc.driverClassName}" />
+        <property name="maximumPoolSize" value="${hikari.maximumPoolSize}" />
+        <property name="idleTimeout" value="${hikari.idleTimeout}" />
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url">${jdbc.url}</prop>
+                <prop key="user">${jdbc.user}</prop>
+                <prop key="password">${jdbc.password}</prop>
+            </props>
+        </property>        
+    </bean><!--endconfighcp-->
+    
+    <bean id="mainDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig" />
+    </bean> 
+  
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mainDataSource" />
+    </bean>
+
+    <!-- enable transaction demarcation with annotations -->
+    <tx:annotation-driven />
+
+    <!-- define the SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="dataSource" ref="mainDataSource" />        
+        <property name="typeAliasesPackage" value="com.bidxi.gpsbrand.model" />
+        <property name="mapperLocations" value="classpath:com/bidxi/gpsbrand/persistence/*.xml" />
+    </bean>
+
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.bidxi.gpsbrand.persistence" />
+    </bean>
+</beans>

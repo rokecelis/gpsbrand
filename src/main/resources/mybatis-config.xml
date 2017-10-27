@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--
+*******************************************************************************
+Copyright (C) 2014 gerardo.roque.
+
+The SOFTWARE PRODUCT is protected by copyright laws and international 
+copyright treaties, as well as other intellectual property laws and treaties. 
+The SOFTWARE PRODUCT is license, you may not copy, modify, sublicense, link 
+with, or distribute the Library except as expressly provided under this 
+License.
+verifica. bidxi Corp
+México D.F.
+*******************************************************************************
+-->
+ 
+<configuration>
+    <settings>        
+        <setting name="logImpl" value="LOG4J"/>        
+    </settings>
+</configuration>

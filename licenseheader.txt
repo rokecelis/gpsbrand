@@ -1,0 +1,17 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+********************************************************************************
+${licensePrefix}Copyright (C) ${date?date?string("yyyy")} ${project.organization!user}.
+${licensePrefix?replace(" +$", "", "r")}
+${licensePrefix}The SOFTWARE PRODUCT is protected by copyright laws and international 
+${licensePrefix}copyright treaties, as well as other intellectual property laws and treaties. 
+${licensePrefix}The SOFTWARE PRODUCT is license, you may not copy, modify, sublicense, link 
+${licensePrefix}with, or distribute the Library except as expressly provided under this 
+${licensePrefix}License.
+${licensePrefix}verifica. 
+${licensePrefix}México D.F.
+********************************************************************************
+<#if licenseLast??>
+${licenseLast}
+</#if>

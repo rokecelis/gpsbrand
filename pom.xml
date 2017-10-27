@@ -1,0 +1,415 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bidxi</groupId>
+    <artifactId>gpsbrand</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>gpsbrand</name>
+
+    <properties>
+        <org.springframework.version>4.3.9.RELEASE</org.springframework.version>
+        <org.spring.security.version>4.2.3.RELEASE</org.spring.security.version>
+        <jersey-servlet.version>1.19</jersey-servlet.version>        
+        <com.owlike.genson.version>1.3</com.owlike.genson.version>
+        <jersey-spring.version>1.19</jersey-spring.version>
+        <org.testng.version>6.8.8</org.testng.version>
+        <com.mysql.version>5.1.24</com.mysql.version>
+        <com.zaxxer.HikariCP.version>2.6.1</com.zaxxer.HikariCP.version>
+        <org.mybatis.version>3.3.0</org.mybatis.version>
+        <org.mybatis-spring.version>1.2.3</org.mybatis-spring.version>        
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.slf4j.version>1.2.17</org.slf4j.version>
+        <javax.servlet-api.version>2.5</javax.servlet-api.version>
+    </properties>
+    
+    <repositories>
+       
+        <repository>
+            <id>atlassian-developer-site</id>
+            <name>Atlassian Maven 2 Contributor Repository</name>
+            <url>http://maven.atlassian.com/repository/public</url>           
+        </repository>
+    </repositories>
+ 
+    <dependencies>        
+        <!--spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency> 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <!--spring security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.spring.security.version}</version>
+        </dependency>            
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${org.spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-acl</artifactId>
+            <version>${org.spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${org.spring.security.version}</version>
+        </dependency>        
+                        
+        
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${org.mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${org.mybatis-spring.version}</version>
+        </dependency>
+        <!-- Log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>  
+        <!--connection pool API--> 
+        
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${com.zaxxer.HikariCP.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--jar DB connection-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${com.mysql.version}</version>
+        </dependency>
+        <!--testng-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${org.testng.version}</version>
+        </dependency>
+        
+        <!-- Jersey -->
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-spring</artifactId>
+            <version>${jersey-spring.version}</version>            
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-asm</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>            
+            <version>${jersey-servlet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>${jersey-servlet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>${jersey-servlet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.owlike</groupId>
+            <artifactId>genson</artifactId>
+            <version>${com.owlike.genson.version}</version>            
+        </dependency>
+        <!--java servlet api-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${javax.servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+        <!--reports-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.14</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <!-- Necesario para construir los profiles: QA. Produccion, Dev. xml and properties task-->
+        <dependency>
+            <groupId>com.oopsconsultancy</groupId>
+            <artifactId>xmltask</artifactId>
+            <version>1.14</version>
+        </dependency>
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+    </dependencies>
+    
+    <!--enviroments example compile for qa env:  mvn clean install -DskipTests  -Pqa-->
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>                                      
+        </profile>        
+        <profile>
+            <id>qa</id>  
+            <build>
+                <plugins>                    
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>ant-magic</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>                                         
+                                        <property name="compile_classpath" refid="maven.compile.classpath"/>                                        
+                                        <property name="outputDir" value="${project.build.outputDirectory}"/>                                          
+                                        <property name="resourceDir" value="${basedir}/src/main/resources"/>                                                                                                                                                                                              
+                                        <property name="buildDir" value="${project.build.directory}/${project.build.finalName}"/>                                                                                                                                                                                              
+                                        <property name="releaseVersion" value="${project.artifactId}-${maven.build.timestamp}"/>                                                                                                                                                                                              
+                                        <property name="groupIdVersion" value="${project.groupId}.${project.artifactId}"/>                                                                                                                                                                                              
+                                        <ant antfile="${basedir}/src/main/resources/ant-env-config.xml" target="qa"/>                                        
+                                    </tasks>                      
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>        
+        </profile>
+        <profile>
+            <id>production</id>    
+            <build>
+                <plugins>                    
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>ant-magic</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>                                         
+                                        <property name="compile_classpath" refid="maven.compile.classpath"/>
+                                        <property name="outputDir" value="${project.build.outputDirectory}"/>                                          
+                                        <property name="resourceDir" value="${basedir}/src/main/resources"/>   
+                                        <property name="buildDir" value="${project.build.directory}/${project.build.finalName}"/>                                                                                                                                                                                              
+                                        <property name="releaseVersion" value="${project.artifactId}-${maven.build.timestamp}"/>   
+                                        <property name="groupIdVersion" value="${project.groupId}.${project.artifactId}"/>                                                                                                                                                                                                                                                                                                                                                    
+                                        <ant antfile="${basedir}/src/main/resources/ant-env-config.xml" target="production"/>                                        
+                                    </tasks>                      
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>              
+        </profile>
+        <profile>
+            <id>hikaricp</id>    
+            <build>
+                <plugins>                    
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>ant-magic</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>                                         
+                                        <property name="compile_classpath" refid="maven.compile.classpath"/>
+                                        <property name="outputDir" value="${project.build.outputDirectory}"/>                                          
+                                        <property name="resourceDir" value="${basedir}/src/main/resources"/>   
+                                        <property name="buildDir" value="${project.build.directory}/${project.build.finalName}"/>                                                                                                                                                                                              
+                                        <property name="releaseVersion" value="${project.artifactId}-${maven.build.timestamp}"/>   
+                                        <property name="groupIdVersion" value="${project.groupId}.${project.artifactId}"/>                                                                                                                                                                                                                                                                                                                                                    
+                                        <ant antfile="${basedir}/src/main/resources/ant-env-config.xml" target="hikaricp"/>                                        
+                                    </tasks>                      
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>              
+        </profile>
+    </profiles>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--<filtering>true</filtering>-->
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>prepare-war</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                        <configuration>
+                            <!--<webappDirectory>${project.basedir}/src/main/webapp</webappDirectory>-->
+                            <warSourceDirectory>${project.basedir}/src/main/webapp</warSourceDirectory>
+                            <target>${project.build.directory}/${project.build.finalName}</target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>6.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

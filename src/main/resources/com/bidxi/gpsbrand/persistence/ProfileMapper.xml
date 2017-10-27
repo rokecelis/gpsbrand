@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bidxi.gpsbrand.persistence.ProfileMapper">
+    <resultMap id="profileResultMap" type="Rol">
+        <id column="id" property="id" jdbcType="INTEGER"/>        
+        <result column="name" property="rol" jdbcType="VARCHAR"/>        
+        <result column="active" property="active" jdbcType="BIT"/>                 
+    </resultMap>   
+         
+    <select id="getProfileFromUser" parameterType="User" resultMap="profileResultMap">
+        select p.id, p.name, p.active from user_profile up
+        inner join profile p on up.profile_id = p.ID and up.user_id= #{id}
+    </select>
+    
+</mapper>

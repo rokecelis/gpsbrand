@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<project name="configenv">
+    <path id="classpath">
+        <pathelement path="${compile_classpath}"/>
+    </path>  
+    <property name="app.groupIdVersion" value="${groupIdVersion}"/>
+    
+    <!--replace . by / by package dir-->
+    <loadresource property="app.package.dir">
+        <string value="${app.groupIdVersion}"/>
+        <filterchain>
+            <replacestring from="." to="${file.separator}"/>
+            <striplinebreaks/>
+        </filterchain>
+    </loadresource>
+     
+    <target name="dev">
+        <echo message="Source dir --> ${compile_classpath}"/>          
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[<!--<bean]]></replacetoken>  
+            <replacevalue><![CDATA[<bean]]></replacevalue>              
+        </replace>               
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[</bean>-->]]></replacetoken>  
+            <replacevalue><![CDATA[</bean>]]></replacevalue>              
+        </replace>               
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[<bean id="hikariConfig"]]></replacetoken>  
+            <replacevalue><![CDATA[<!--bean id="hikariConfig"]]></replacevalue>              
+        </replace>               
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[</bean><!--endconfighcp-->]]></replacetoken>  
+            <replacevalue><![CDATA[</bean --><!--endconfighcp-->]]></replacevalue>              
+        </replace>               
+    </target> 
+    
+    <taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="classpath"/>        
+           
+    <target name="qa">        
+        <!--echo resource dir-->
+        <echo message="Building profile to QA"/>    
+        <!--uncomment main datasource from spring file for persistence-->
+        <xmltask source="${resourceDir}/${app.package.dir}/spring/applicationContext-persistence.xml" dest="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">                                
+            <!--<remove path="//child::comment()"/>-->
+            <remove path="/:beans/:bean[@id='hikariConfig']"/> 
+            <remove path="/:beans/:bean[@id='mainDataSource']"/> 
+            <!--<uncomment path="/:beans/comment()[3]"/>-->            
+        </xmltask>             
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[<!--<bean]]></replacetoken>  
+            <replacevalue><![CDATA[<bean]]></replacevalue>              
+        </replace>               
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[</bean>-->]]></replacetoken>  
+            <replacevalue><![CDATA[</bean>]]></replacevalue>              
+        </replace>               
+        <!--create version por footer.xhtml template-->
+        <replace file="${buildDir}/ria/template/footer.html" propertyFile="${outputDir}/application.properties">
+            <replacefilter token="@project.timestamp.version@" value="${releaseVersion}"/>
+        </replace>
+    </target>
+    
+    <target name="production">
+        <echo message="Building profile to production"/>    
+        <!--uncomment main datasource from spring file for persistence-->
+        <xmltask source="${resourceDir}/${app.package.dir}/spring/applicationContext-persistence.xml" dest="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">                                            
+            <remove path="/:beans/:bean[@id='hikariConfig']"/> 
+            <remove path="/:beans/:bean[@id='mainDataSource']"/>             
+        </xmltask>             
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[<!--<bean]]></replacetoken>  
+            <replacevalue><![CDATA[<bean]]></replacevalue>              
+        </replace>               
+        <replace casesensitive="false" file="${outputDir}/${app.package.dir}/spring/applicationContext-persistence.xml">
+            <replacetoken><![CDATA[</bean>-->]]></replacetoken>  
+            <replacevalue><![CDATA[</bean>]]></replacevalue>              
+        </replace>               
+        <replace casesensitive="false" file="${outputDir}/log4j.properties">
+            <replacetoken><![CDATA[persistence=DEBUG]]></replacetoken>  
+            <replacevalue><![CDATA[persistence=WARN]]></replacevalue>              
+        </replace>        
+        <!--create version por footer.xhtml template-->
+        <replace file="${buildDir}/ria/template/footer.html" propertyFile="${outputDir}/application.properties">
+            <replacefilter token="@project.timestamp.version@" value="${releaseVersion}"/>
+        </replace>
+    </target>
+
+    <target name="hikaricp">
+        <echo message="Building profile for HikariCP"/>    
+        <!--uncomment main datasource from spring file for persistence-->
+        <replace casesensitive="false" file="${outputDir}/log4j.properties">
+            <replacetoken><![CDATA[persistence=DEBUG]]></replacetoken>  
+            <replacevalue><![CDATA[persistence=WARN]]></replacevalue>              
+        </replace>
+        <!-- Definir el tamaño del pool para producción-->    
+        <echo message="DB properties -> ${resourceDir}/database.properties -> ${outputDir}/database.properties"/>    
+        <replace file="${outputDir}/database.properties" propertyFile="${resourceDir}/database.properties">
+            <replacefilter token="=10" property="production.pool.size"/>
+        </replace>        
+        <replace file="${outputDir}/database.properties" propertyFile="${resourceDir}/database.properties">
+            <replacefilter token="localhost" property="production.host.ip"/>
+        </replace>        
+        <!--create version por footer.xhtml template-->
+        <replace file="${buildDir}/ria/template/footer.html" propertyFile="${outputDir}/application.properties">
+            <replacefilter token="@project.timestamp.version@" value="${releaseVersion}"/>
+        </replace>
+    </target>
+
+</project>

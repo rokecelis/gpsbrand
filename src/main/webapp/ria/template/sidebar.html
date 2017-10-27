@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <div class="navbar-collapse collapse templatemo-sidebar">
+    <ul class="templatemo-sidebar-menu">
+      <li>
+        <ui:include src="info.xhtml"/>
+      </li>
+      <li id="dashboard">
+        <a href="#{request.contextPath}/ria/private/dashboard/index.jsf"><i class="fa fa-dashboard"></i>#{sidebar.dashboard}</a>
+      </li>
+      <li id="data">
+        <a href="#{request.contextPath}/ria/private/data/index.jsf"><i class="fa fa-cubes"></i><span class="badge pull-right">9</span>Data Visualization</a>
+      </li>
+      <li id="maps">
+        <a href="#{request.contextPath}/ria/private/maps/index.jsf"><i class="fa fa-map-marker"></i><span class="badge pull-right">42</span>#{sidebar.maps}</a>
+      </li>
+      <li id="reports">
+        <a href="#{request.contextPath}/ria/private/reports/index.jsf"><i class="fa fa-print"></i>#{sidebar.reports}</a>
+      </li>
+      <li id="manager" class="sub">
+        <a href="javascript:;">
+          <i class="fa fa-align-justify"></i>#{sidebar.manager}<div class="pull-right"><span class="caret"></span></div>
+        </a>
+        <ul class="templatemo-submenu">
+          <li id="users"><a href="#{request.contextPath}/ria/private/manager/users.jsf">#{sidebar.users}</a></li>
+          <li id="devices"><a href="#{request.contextPath}/ria/private/manager/devices.jsf">#{sidebar.devices}</a></li>
+        </ul>
+      </li>
+      <li id="preferences">
+        <a href="#{request.contextPath}/ria/private/preferences/index.jsf"><i class="fa fa-cog"></i>#{sidebar.preferences}</a>
+      </li>
+      <li>
+        <a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-power-off"></i>#{sidebar.exit}</a>
+      </li>
+    </ul>
+  </div>
+</ui:composition>
